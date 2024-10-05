@@ -3,8 +3,11 @@ import 'package:lottie/lottie.dart';
 import 'package:newshub/core/constant/app_colors.dart';
 import 'package:newshub/core/constant/font_text.dart';
 import 'package:newshub/core/services/news_service.dart';
+import 'package:newshub/providers/auth_provider.dart';
 import 'package:newshub/providers/country_code_provider.dart';
+import 'package:newshub/ui/auth/auth_page.dart';
 import 'package:newshub/ui/home/components/news_component.dart';
+import 'package:newshub/ui/pages/articles_list_page.dart';
 import 'package:newshub/ui/widgets/loading_widget.dart';
 import 'package:newshub/view_models/news_model.dart';
 import 'package:provider/provider.dart';
@@ -59,6 +62,25 @@ class _HomePageState extends State<HomePage>
           style: AppFonts.titleFont.copyWith(color: AppColors.textColorWhite),
         ),
         actions: [
+          IconButton(
+            onPressed: () {
+              Provider.of<AuthProvider>(context, listen: false).signOut();
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => AuthPage(),
+                ),
+                (route) => false,
+              );
+            },
+            icon: const Icon(
+              Icons.logout_rounded,
+              size: 28,
+              color: AppColors.backgroundColor,
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
           Row(
             children: [
               const Icon(Icons.location_on, color: AppColors.textColorWhite),
@@ -139,9 +161,16 @@ class _HomePageState extends State<HomePage>
       alignment: Alignment.bottomRight,
       children: [
         if (isFABOpen) ...[
-          _buildSmallFAB('assets/animations/saved.json', 'Saved', 1, () {}),
-          _buildSmallFAB(
-              'assets/animations/favorite.json', 'Favorite', 2, () {}),
+          _buildSmallFAB('assets/animations/saved.json', 'Saved', 1, () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const ArticlesListPage(showSaved: true),
+            ));
+          }),
+          _buildSmallFAB('assets/animations/favorite.json', 'Favorite', 2, () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const ArticlesListPage(showSaved: false),
+            ));
+          }),
         ],
         FloatingActionButton(
           onPressed: _toggleFAB,

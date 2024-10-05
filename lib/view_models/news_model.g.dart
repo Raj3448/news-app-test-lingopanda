@@ -6,9 +6,18 @@ part of 'news_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+Map<String, dynamic> _$ArticleToJson(Article instance) => <String, dynamic>{
+      'author': instance.author,
+      'title': instance.title,
+      'description': instance.description,
+      'url': instance.url,
+      'urlToImage': instance.urlToImage,
+      'publishedAt': instance.publishedAt.toIso8601String(),
+      'content': instance.content,
+    };
+
 _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
     _$ArticleImpl(
-      source: Source.fromJson(json['source'] as Map<String, dynamic>),
       author: json['author'] as String?,
       title: json['title'] as String?,
       description: json['description'] as String?,
@@ -20,7 +29,6 @@ _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) =>
     <String, dynamic>{
-      'source': instance.source,
       'author': instance.author,
       'title': instance.title,
       'description': instance.description,
@@ -28,15 +36,4 @@ Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) =>
       'urlToImage': instance.urlToImage,
       'publishedAt': instance.publishedAt.toIso8601String(),
       'content': instance.content,
-    };
-
-_$SourceImpl _$$SourceImplFromJson(Map<String, dynamic> json) => _$SourceImpl(
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-    );
-
-Map<String, dynamic> _$$SourceImplToJson(_$SourceImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
     };

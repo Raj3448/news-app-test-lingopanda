@@ -2,15 +2,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:newshub/core/constant/app_colors.dart';
 import 'package:newshub/core/services/firebase_auth_service.dart';
+import 'package:newshub/core/util/setup_hivebox.dart';
+import 'package:newshub/core/util/token_manager.dart';
 import 'package:newshub/providers/auth_provider.dart';
 import 'package:newshub/providers/country_code_provider.dart';
 import 'package:newshub/repo/auth_repo.dart';
 import 'package:newshub/ui/auth/auth_page.dart';
+import 'package:newshub/ui/home/home_page.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await setupHiveBox();
   await Firebase.initializeApp();
+  
   runApp(const MyApp());
 }
 
@@ -35,7 +40,7 @@ class MyApp extends StatelessWidget {
           primaryColor: AppColors.primaryColor,
           scaffoldBackgroundColor: AppColors.backgroundColor,
         ),
-        home: AuthPage(),
+        home: TokenManager().hasToken() ? const HomePage() : AuthPage(),
       ),
     );
   }

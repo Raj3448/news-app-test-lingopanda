@@ -15,6 +15,7 @@ class NewsComponent extends StatelessWidget {
           builder: (context) => NewsDetailsViewPage(
             article: article,
             isFav: false,
+            isSaved: false,
           ),
         ));
       },

@@ -20,7 +20,6 @@ Article _$ArticleFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Article {
-  Source get source => throw _privateConstructorUsedError;
   String? get author => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -44,16 +43,13 @@ abstract class $ArticleCopyWith<$Res> {
       _$ArticleCopyWithImpl<$Res, Article>;
   @useResult
   $Res call(
-      {Source source,
-      String? author,
+      {String? author,
       String? title,
       String? description,
       String? url,
       String? urlToImage,
       DateTime publishedAt,
       String? content});
-
-  $SourceCopyWith<$Res> get source;
 }
 
 /// @nodoc
@@ -71,7 +67,6 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? source = null,
     Object? author = freezed,
     Object? title = freezed,
     Object? description = freezed,
@@ -81,10 +76,6 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
     Object? content = freezed,
   }) {
     return _then(_value.copyWith(
-      source: null == source
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
-              as Source,
       author: freezed == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
@@ -115,16 +106,6 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
               as String?,
     ) as $Val);
   }
-
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SourceCopyWith<$Res> get source {
-    return $SourceCopyWith<$Res>(_value.source, (value) {
-      return _then(_value.copyWith(source: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -135,17 +116,13 @@ abstract class _$$ArticleImplCopyWith<$Res> implements $ArticleCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {Source source,
-      String? author,
+      {String? author,
       String? title,
       String? description,
       String? url,
       String? urlToImage,
       DateTime publishedAt,
       String? content});
-
-  @override
-  $SourceCopyWith<$Res> get source;
 }
 
 /// @nodoc
@@ -161,7 +138,6 @@ class __$$ArticleImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? source = null,
     Object? author = freezed,
     Object? title = freezed,
     Object? description = freezed,
@@ -171,10 +147,6 @@ class __$$ArticleImplCopyWithImpl<$Res>
     Object? content = freezed,
   }) {
     return _then(_$ArticleImpl(
-      source: null == source
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
-              as Source,
       author: freezed == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
@@ -211,8 +183,7 @@ class __$$ArticleImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ArticleImpl implements _Article {
   const _$ArticleImpl(
-      {required this.source,
-      this.author,
+      {this.author,
       this.title,
       this.description,
       this.url,
@@ -223,8 +194,6 @@ class _$ArticleImpl implements _Article {
   factory _$ArticleImpl.fromJson(Map<String, dynamic> json) =>
       _$$ArticleImplFromJson(json);
 
-  @override
-  final Source source;
   @override
   final String? author;
   @override
@@ -242,7 +211,7 @@ class _$ArticleImpl implements _Article {
 
   @override
   String toString() {
-    return 'Article(source: $source, author: $author, title: $title, description: $description, url: $url, urlToImage: $urlToImage, publishedAt: $publishedAt, content: $content)';
+    return 'Article(author: $author, title: $title, description: $description, url: $url, urlToImage: $urlToImage, publishedAt: $publishedAt, content: $content)';
   }
 
   @override
@@ -250,7 +219,6 @@ class _$ArticleImpl implements _Article {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ArticleImpl &&
-            (identical(other.source, source) || other.source == source) &&
             (identical(other.author, author) || other.author == author) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
@@ -265,8 +233,8 @@ class _$ArticleImpl implements _Article {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, source, author, title,
-      description, url, urlToImage, publishedAt, content);
+  int get hashCode => Object.hash(runtimeType, author, title, description, url,
+      urlToImage, publishedAt, content);
 
   /// Create a copy of Article
   /// with the given fields replaced by the non-null parameter values.
@@ -286,8 +254,7 @@ class _$ArticleImpl implements _Article {
 
 abstract class _Article implements Article {
   const factory _Article(
-      {required final Source source,
-      final String? author,
+      {final String? author,
       final String? title,
       final String? description,
       final String? url,
@@ -297,8 +264,6 @@ abstract class _Article implements Article {
 
   factory _Article.fromJson(Map<String, dynamic> json) = _$ArticleImpl.fromJson;
 
-  @override
-  Source get source;
   @override
   String? get author;
   @override
@@ -319,166 +284,5 @@ abstract class _Article implements Article {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ArticleImplCopyWith<_$ArticleImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Source _$SourceFromJson(Map<String, dynamic> json) {
-  return _Source.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Source {
-  String? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-
-  /// Serializes this Source to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Source
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $SourceCopyWith<Source> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SourceCopyWith<$Res> {
-  factory $SourceCopyWith(Source value, $Res Function(Source) then) =
-      _$SourceCopyWithImpl<$Res, Source>;
-  @useResult
-  $Res call({String? id, String? name});
-}
-
-/// @nodoc
-class _$SourceCopyWithImpl<$Res, $Val extends Source>
-    implements $SourceCopyWith<$Res> {
-  _$SourceCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Source
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$SourceImplCopyWith<$Res> implements $SourceCopyWith<$Res> {
-  factory _$$SourceImplCopyWith(
-          _$SourceImpl value, $Res Function(_$SourceImpl) then) =
-      __$$SourceImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? id, String? name});
-}
-
-/// @nodoc
-class __$$SourceImplCopyWithImpl<$Res>
-    extends _$SourceCopyWithImpl<$Res, _$SourceImpl>
-    implements _$$SourceImplCopyWith<$Res> {
-  __$$SourceImplCopyWithImpl(
-      _$SourceImpl _value, $Res Function(_$SourceImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Source
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-  }) {
-    return _then(_$SourceImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SourceImpl implements _Source {
-  const _$SourceImpl({this.id, this.name});
-
-  factory _$SourceImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SourceImplFromJson(json);
-
-  @override
-  final String? id;
-  @override
-  final String? name;
-
-  @override
-  String toString() {
-    return 'Source(id: $id, name: $name)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SourceImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name);
-
-  /// Create a copy of Source
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SourceImplCopyWith<_$SourceImpl> get copyWith =>
-      __$$SourceImplCopyWithImpl<_$SourceImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SourceImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Source implements Source {
-  const factory _Source({final String? id, final String? name}) = _$SourceImpl;
-
-  factory _Source.fromJson(Map<String, dynamic> json) = _$SourceImpl.fromJson;
-
-  @override
-  String? get id;
-  @override
-  String? get name;
-
-  /// Create a copy of Source
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SourceImplCopyWith<_$SourceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

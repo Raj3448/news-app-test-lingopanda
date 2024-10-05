@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newshub/core/util/token_manager.dart';
 import 'package:newshub/repo/auth_repo.dart';
 import 'package:newshub/view_models/user_model.dart';
 
@@ -72,6 +73,7 @@ class AuthProvider with ChangeNotifier {
             notifyListeners();
           },
         );
+        TokenManager().deleteToken();
         _setLoading(false);
       },
     );

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:newshub/core/services/firebase_auth_service.dart';
+import 'package:newshub/core/util/token_manager.dart';
 import 'package:newshub/view_models/user_model.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -8,11 +9,14 @@ class AuthRepository {
 
   AuthRepository(this._firebaseAuthService);
 
-  Future<Either<String, UserModel>> signUp(String email, String password, String name) async {
+  Future<Either<String, UserModel>> signUp(
+      String email, String password, String name) async {
     try {
       final user = await _firebaseAuthService.signUp(email, password);
       if (user != null) {
-        await _firebaseAuthService.storeUserData(UserModel(uid: user.uid, name: name, email: email));
+        await _firebaseAuthService
+            .storeUserData(UserModel(uid: user.uid, name: name, email: email));
+        TokenManager().saveToken(await user.getIdToken() ?? user.uid);
         return Right(UserModel(uid: user.uid, name: name, email: email));
       } else {
         return const Left('Sign-up failed: User is null');
@@ -24,11 +28,16 @@ class AuthRepository {
     }
   }
 
-  Future<Either<String, UserModel>> signIn(String email, String password) async {
+  Future<Either<String, UserModel>> signIn(
+      String email, String password) async {
     try {
       final user = await _firebaseAuthService.signIn(email, password);
       if (user != null) {
-        return Right(UserModel(uid: user.uid, name: user.displayName ?? '', email: user.email ?? ''));
+        TokenManager().saveToken(await user.getIdToken() ?? user.uid);
+        return Right(UserModel(
+            uid: user.uid,
+            name: user.displayName ?? '',
+            email: user.email ?? ''));
       } else {
         return const Left('Sign-in failed: User is null');
       }

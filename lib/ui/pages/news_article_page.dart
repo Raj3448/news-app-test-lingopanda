@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:newshub/core/constant/app_colors.dart';
 import 'package:newshub/core/constant/font_text.dart';
+import 'package:newshub/core/services/news_service.dart';
 import 'package:newshub/view_models/news_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,10 +12,13 @@ import 'package:url_launcher/url_launcher.dart';
 class NewsDetailsViewPage extends StatefulWidget {
   final Article article;
   bool isFav;
+  bool isSaved;
+
   NewsDetailsViewPage({
     Key? key,
     required this.article,
     required this.isFav,
+    required this.isSaved,
   }) : super(key: key);
 
   @override
@@ -25,29 +29,48 @@ class _NewsDetailsViewPageState extends State<NewsDetailsViewPage>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late AnimationController _savedController;
-  bool isSaved = false;
+
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
     _savedController = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
-    if (widget.isFav) {
-      _controller.forward();
-    }
+    _initializeArticleStatus();
+  }
+
+  Future<void> _initializeArticleStatus() async {
+    bool isFav =
+        await NewsService().isFavArticle(widget.article.publishedAt.toString());
+    bool isSaved = await NewsService()
+        .isSavedArticle(widget.article.publishedAt.toString());
+
+    setState(() {
+      widget.isFav = isFav;
+      widget.isSaved = isSaved;
+
+      if (widget.isFav) {
+        _controller.forward();
+      }
+      if (widget.isSaved) {
+        _savedController.forward();
+      }
+    });
   }
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
     _savedController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.secondaryColor,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
@@ -64,12 +87,17 @@ class _NewsDetailsViewPageState extends State<NewsDetailsViewPage>
         actions: [
           GestureDetector(
             onTap: () {
-              isSaved = !isSaved;
+              setState(() {
+                widget.isSaved = !widget.isSaved;
+              });
 
-              if (isSaved) {
+              if (widget.isSaved) {
                 _savedController.forward();
+                NewsService().addSavedArticle(widget.article);
               } else {
                 _savedController.reverse();
+                NewsService()
+                    .removeSavedArticle(widget.article.publishedAt.toString());
               }
             },
             child: LottieBuilder.asset(
@@ -91,6 +119,9 @@ class _NewsDetailsViewPageState extends State<NewsDetailsViewPage>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Hero(
                       tag: widget.article.publishedAt,
                       child: ClipRRect(
@@ -145,14 +176,17 @@ class _NewsDetailsViewPageState extends State<NewsDetailsViewPage>
                           const Spacer(),
                           GestureDetector(
                             onTap: () {
-                              if (widget.isFav) {
-                                _controller.forward();
-                              } else {
-                                _controller.reverse();
-                              }
                               setState(() {
                                 widget.isFav = !widget.isFav;
                               });
+                              if (widget.isFav) {
+                                _controller.forward();
+                                NewsService().addFavArticle(widget.article);
+                              } else {
+                                _controller.reverse();
+                                NewsService().removeFavArticle(
+                                    widget.article.publishedAt.toString());
+                              }
                             },
                             child: LottieBuilder.asset(
                               'assets/animations/favorite.json',
@@ -173,7 +207,7 @@ class _NewsDetailsViewPageState extends State<NewsDetailsViewPage>
                       ),
                     ),
                     Text(
-                      widget.article.description??'',
+                      widget.article.description ?? '',
                       style: AppFonts.bodyFont,
                     ),
                   ],
