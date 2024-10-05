@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "63815978887",
+    "project_id": "news-app-5066d",
+    "storage_bucket": "news-app-5066d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63815978887:android:32066c0d55d82e7af58d22",
+        "android_client_info": {
+          "package_name": "com.example.headline_hub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63815978887-o8e5bfqte6k58c3c6h7f494id4unf4fb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.headline_hub",
+            "certificate_hash": "af1d431eb1c7fc347afff8d04410807ed65022bd"
+          }
+        },
+        {
+          "client_id": "63815978887-7csvbjd2d3fl7sdgc7dhr8hrqm1q4jp4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZh47HsZzkcZtVmzkpRUiQMSwIIFODH30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63815978887-7csvbjd2d3fl7sdgc7dhr8hrqm1q4jp4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "63815978887-hgraguve1btde8s806bijn00k5q9nu74.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.headlineHub.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63815978887:android:285199e4abeb1b88f58d22",
+        "android_client_info": {
+          "package_name": "com.example.newsh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63815978887-7csvbjd2d3fl7sdgc7dhr8hrqm1q4jp4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZh47HsZzkcZtVmzkpRUiQMSwIIFODH30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63815978887-7csvbjd2d3fl7sdgc7dhr8hrqm1q4jp4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "63815978887-hgraguve1btde8s806bijn00k5q9nu74.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.headlineHub.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
