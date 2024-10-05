@@ -9,6 +9,9 @@ class NewsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if ((article.title?.isEmpty ?? true) || (article.description?.isEmpty ?? true) || article.title == '[Removed]' || article.description == '[removed]' ) {
+      return const SizedBox();
+    }
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
