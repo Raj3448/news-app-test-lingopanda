@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newshub/core/constant/font_text.dart';
-import 'package:newshub/ui/home/pages/news_article_page.dart';
+import 'package:newshub/ui/pages/news_article_page.dart';
 import 'package:newshub/view_models/news_model.dart';
 
 class NewsComponent extends StatelessWidget {
@@ -11,7 +11,12 @@ class NewsComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => NewsDetailsViewPage(article: article, isFav: false,),));
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => NewsDetailsViewPage(
+            article: article,
+            isFav: false,
+          ),
+        ));
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -49,17 +54,20 @@ class NewsComponent extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, right: 10, bottom: 10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                clipBehavior: Clip.antiAlias,
-                child: Image.network(
-                    fit: BoxFit.cover,
-                    width: 110,
-                    height: 110,
-                    article.urlToImage ??
-                        'https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg'),
+            Hero(
+              tag: article.publishedAt,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10, right: 10, bottom: 10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  clipBehavior: Clip.antiAlias,
+                  child: Image.network(
+                      fit: BoxFit.cover,
+                      width: 110,
+                      height: 110,
+                      article.urlToImage ??
+                          'https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg'),
+                ),
               ),
             ),
           ],
